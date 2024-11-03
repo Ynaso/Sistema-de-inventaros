@@ -1,6 +1,6 @@
 from django.db import models
 from productos.models import Producto
-from ventas.models import FacturaVenta
+
 from django.db.models import Sum, F
 
 class TipoMovimiento(models.Model):
@@ -11,7 +11,6 @@ class TipoMovimiento(models.Model):
 
 from django.db import models
 from productos.models import Producto
-from ventas.models import FacturaVenta
 from django.db.models import Sum, F
 from decimal import Decimal  # Import Decimal
 
@@ -19,7 +18,7 @@ class Kardex(models.Model):
     producto = models.ForeignKey(Producto, on_delete=models.CASCADE)
     fecha_movimiento = models.DateTimeField(auto_now_add=True)
     tipo_movimiento = models.ForeignKey('TipoMovimiento', on_delete=models.CASCADE)
-    cantidad = models.PositiveIntegerField()
+    cantidad = models.DecimalField(max_digits=10, decimal_places=2)
     saldo = models.PositiveIntegerField()
 
     costo_unitario = models.DecimalField(max_digits=10, decimal_places=2)

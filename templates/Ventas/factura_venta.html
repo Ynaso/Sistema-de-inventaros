@@ -44,22 +44,30 @@
                                 <select id="client" class="form-select" required>
                                     <option value="">Selecciona tu cliente</option>
                                     {% for cliente in clientes %}
-                                    <option value="{{ cliente.id }}">{{ cliente.nombre }}</option>
+                                        <option value="{{ cliente.id }}" 
+                                                data-address="{{ cliente.direccion }}" 
+                                                data-phone="{{ cliente.telefono }}" 
+                                                data-ruc="{{ cliente.ruc }}">
+                                            {{ cliente.nombre }} {{ cliente.apellidos }}
+                                        </option>
                                     {% endfor %}
                                 </select>
                             </div>
+                    
                             <div class="col-md-6">
                                 <label for="phoneNumber" class="form-label">
                                     <i class="fas fa-phone me-2"></i>Número de teléfono
                                 </label>
                                 <input type="tel" id="phoneNumber" class="form-control" required>
                             </div>
+                    
                             <div class="col-md-6">
                                 <label for="rucNumber" class="form-label">
                                     <i class="fas fa-id-card me-2"></i>Número RUC
                                 </label>
                                 <input type="text" id="rucNumber" class="form-control" required>
                             </div>
+                    
                             <div class="col-md-6">
                                 <label for="saleType" class="form-label">
                                     <i class="fas fa-credit-card me-2"></i>Tipo de venta
@@ -67,10 +75,11 @@
                                 <select id="saleType" class="form-select" required>
                                     <option value="">Selecciona un tipo de venta</option>
                                     {% for tipo in tipos_venta %}
-                                    <option value="{{ tipo.id }}">{{ tipo.nombre }}</option>
+                                        <option value="{{ tipo.id }}">{{ tipo.nombre }}</option>
                                     {% endfor %}
                                 </select>
                             </div>
+                    
                             <div class="col-12">
                                 <label for="address" class="form-label">
                                     <i class="fas fa-map-marker-alt me-2"></i>Dirección
@@ -79,6 +88,7 @@
                             </div>
                         </div>
                     </div>
+                    
             
                     <!-- Product Information -->
                     <div class="card mb-4 field2 flex-grow-1" style="flex: 3;">
@@ -91,7 +101,7 @@
                                 <label for="productImage" class="form-label">
                                     <i class="fas fa-image me-2"></i>Imagen
                                 </label>
-                                <img id="productImage" src="https://picsum.photos/id/37/200" style="border-radius: 30px;" alt="Product Image" class="img-fluid border">
+                                <img id="productImage" src="https://picsum.photos/id/37/200" style="border-radius: 30px;" alt="Imagen del producto" class="img-fluid border">
                             </div>
             
                             <!-- Form Groups Section -->
@@ -169,54 +179,54 @@
                 </div>
 
                  <!-- Product Table -->
-            <div class="card product-table" style="margin-top:-1%">
-                <div class="card-header bg-primary text-white">
-                    <h2 class="h5 mb-0">Lista de productos</h2>
-                </div>
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <table class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Producto</th>
-                                    <th>Costo Unitario</th>
-                                    <th>Precio de venta</th>
-                                    <th>Cantidad</th>
-                                    <th>Descuento</th>
-                                    <th>Total</th>
-                                    <th>Acciones</th>
-                                </tr>
-                            </thead>
-                            <tbody id="productTable">
-                                <!-- Product rows will be added here dynamically -->
-                            </tbody>
-                        </table>
+                <div class="card product-table" style="margin-top:-1%">
+                    <div class="card-header bg-primary text-white">
+                        <h2 class="h5 mb-0">Lista de productos</h2>
                     </div>
-                </div>
-                <div class="card-footer d-flex justify-content-between align-items-center bg-light">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Producto</th>
+                                        <th>Costo Unitario</th>
+                                        <th>Precio de venta</th>
+                                        <th>Cantidad</th>
+                                        <th>Descuento</th>
+                                        <th>Total</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="productTable">
+                                    <!-- Product rows will be added here dynamically -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="card-footer d-flex justify-content-between align-items-center bg-light">
 
-                    <div>
-                       <button class="btn btn-success" id="submitSale">Realizar venta</button>
-                    </div>
-                    <div>
-                        <span class="text-muted">Subtotal:</span>
-                        <span class="fw-bold">$<span id="subtotal">0.00</span></span>
-                    </div>
-                    <div>
-                        <span class="text-muted">Descuento:</span>
-                        <span class="fw-bold">$<span id="totalDiscount">0.00</span></span>
-                    </div>
-                    <div>
-                        <span class="text-muted">IVA (15%):</span>
-                        <span class="fw-bold">$<span id="tax">0.00</span></span>
-                    </div>
-                    <div>
-                        <span class="text-muted">Total:</span>
-                        <span class="fw-bold">$<span id="grandTotal">0.00</span></span>
+                        <div>
+                        <button class="btn btn-success" id="submitSale">Realizar venta</button>
+                        </div>
+                        <div>
+                            <span class="text-muted">Subtotal:</span>
+                            <span class="fw-bold">$<span id="subtotal">0.00</span></span>
+                        </div>
+                        <div>
+                            <span class="text-muted">Descuento:</span>
+                            <span class="fw-bold">$<span id="totalDiscount">0.00</span></span>
+                        </div>
+                        <div>
+                            <span class="text-muted">IVA (15%):</span>
+                            <span class="fw-bold">$<span id="tax">0.00</span></span>
+                        </div>
+                        <div>
+                            <span class="text-muted">Total:</span>
+                            <span class="fw-bold">$<span id="grandTotal">0.00</span></span>
+                        </div>
                     </div>
                 </div>
-            </div>
             </form>
             
         
@@ -226,214 +236,233 @@
     {% endblock %}
 
     {% block scripts %}
-        <script>
-            document.addEventListener('DOMContentLoaded', function () {
-                const productSelect = document.getElementById('product');
-                const unitCostDisplayInput = document.getElementById('unitCostDisplay');
-                const sellingPriceDisplayInput = document.getElementById('sellingPriceDisplay');
-                const availableStockInput = document.getElementById('availableStock');
-                const quantityInput = document.getElementById('quantity');
-                const discountInput = document.getElementById('discount');
-                const addProductBtn = document.getElementById('addProduct');
-                const productTable = document.getElementById('productTable');
-                const submitBtn = document.getElementById('submitSale');
-            
-                const subtotalDisplay = document.getElementById('subtotal');
-                const discountAmountDisplay = document.getElementById('totalDiscount');
-                const taxDisplay = document.getElementById('tax');
-                const grandTotalDisplay = document.getElementById('grandTotal');
-            
-                let products = [];
-            
-                productSelect.addEventListener('change', updateProductInfo);
-            
-                function updateProductInfo() {
-                    const selectedOption = productSelect.options[productSelect.selectedIndex];
-                    const unitCost = parseFloat(selectedOption.getAttribute('data-unit-cost'));
-                    const sellingPrice = parseFloat(selectedOption.getAttribute('data-selling-price'));
-                    const availableStock = parseInt(selectedOption.getAttribute('data-stock'));
-            
-                    unitCostDisplayInput.value = unitCost.toFixed(2);
-                    sellingPriceDisplayInput.value = sellingPrice.toFixed(2);
-                    availableStockInput.value = availableStock;
-                    quantityInput.max = availableStock;
-                    quantityInput.value = '1';
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const productSelect = document.getElementById('product');
+            const unitCostDisplayInput = document.getElementById('unitCostDisplay');
+            const availableStockInput = document.getElementById('availableStock');
+            const sellingPriceDisplayInput = document.getElementById('sellingPriceDisplay');
+            const quantityInput = document.getElementById('quantity');
+            const discountInput = document.getElementById('discount');
+            const addProductBtn = document.getElementById('addProduct');
+            const productTable = document.getElementById('productTable');
+            const submitBtn = document.getElementById('submitSale');
+    
+            const subtotalDisplay = document.getElementById('subtotal');
+            const discountAmountDisplay = document.getElementById('totalDiscount');
+            const taxDisplay = document.getElementById('tax');
+            const grandTotalDisplay = document.getElementById('grandTotal');
+    
+            const clientSelect = document.getElementById('client');
+            const phoneNumberInput = document.getElementById('phoneNumber');
+            const rucNumberInput = document.getElementById('rucNumber');
+            const addressInput = document.getElementById('address');
+    
+            let products = [];
+    
+            productSelect.addEventListener('change', updateProductInfo);
+    
+            function updateProductInfo() {
+                const selectedOption = productSelect.options[productSelect.selectedIndex];
+                const unitCost = parseFloat(selectedOption.getAttribute('data-unit-cost')) || 0;
+                const availableStock = parseInt(selectedOption.getAttribute('data-stock')) || 0;
+                const sellingPrice = parseFloat(selectedOption.getAttribute('data-selling-price')) || 0;
+                const imageUrl = selectedOption.getAttribute('data-image-product'); // Get the image URL
+    
+                unitCostDisplayInput.value = unitCost.toFixed(2);
+                availableStockInput.value = availableStock;
+                sellingPriceDisplayInput.value = sellingPrice.toFixed(2);
+                quantityInput.max = availableStock;
+                quantityInput.value = '1';
+    
+                // Update the image src
+                const productImage = document.getElementById('productImage');
+                if (imageUrl) {
+                    productImage.src = imageUrl; // Change the image source
                 }
-            
-                addProductBtn.addEventListener('click', function () {
-                    const productId = productSelect.value;
-                    const productName = productSelect.options[productSelect.selectedIndex].text;
-                    const unitCost = parseFloat(unitCostDisplayInput.value);
-                    const sellingPrice = parseFloat(sellingPriceDisplayInput.value);
-                    const quantity = parseInt(quantityInput.value);
-                    const discount = parseFloat(discountInput.value);
-            
-                    const availableStock = parseInt(productSelect.options[productSelect.selectedIndex].dataset.stock);
-            
-                    if (productId && quantity > 0 && quantity <= availableStock) {
-                        addProduct(productId, productName, unitCost, sellingPrice, quantity, discount);
-                        updateTable();
-                        updateStock(productId, availableStock - quantity);
-                        resetProductForm();
-                    } else {
-                        alert('Please fill in all fields or adjust the quantity based on available stock.');
-                    }
-                });
-            
-                function addProduct(id, name, unitCost, sellingPrice, quantity, discount) {
-                    const existingProduct = products.find(p => p.id === id);
-                    if (existingProduct) {
-                        existingProduct.quantity += quantity;
-                    } else {
-                        products.push({ id, name, unitCost, sellingPrice, quantity, discount });
-                    }
+            }
+    
+            addProductBtn.addEventListener('click', function () {
+                const productId = productSelect.value;
+                const productName = productSelect.options[productSelect.selectedIndex].text;
+                const unitCost = parseFloat(unitCostDisplayInput.value) || 0;
+                const sellingPrice = parseFloat(sellingPriceDisplayInput.value) || 0;
+                const quantity = parseInt(quantityInput.value) || 0;
+                const discount = parseFloat(discountInput.value) || 0;
+    
+                const availableStock = parseInt(productSelect.options[productSelect.selectedIndex].dataset.stock) || 0;
+    
+                if (productId && quantity > 0 && quantity <= availableStock) {
+                    addProduct(productId, productName, unitCost, quantity, discount, sellingPrice); // Pass sellingPrice
+                    updateTable();
+                    updateStock(productId, availableStock - quantity);
+                    resetProductForm();
+                } else {
+                    alert('Please fill in all fields or adjust the quantity based on available stock.');
                 }
-            
-                function updateTable() {
-                    productTable.innerHTML = '';
-                    let subtotal = 0;
-                    let totalDiscount = 0;
-                    let totalTax = 0;
-            
-                    products.forEach(product => {
-                        const totalSellingPrice = product.sellingPrice * product.quantity;
-                        const discountAmount = totalSellingPrice * (product.discount / 100);
-                        const totalAfterDiscount = totalSellingPrice - discountAmount;
-                        const productTax = totalSellingPrice * 0.15;
-            
-                        subtotal += totalSellingPrice;
-                        totalDiscount += discountAmount;
-                        totalTax += productTax;
-            
-                        const row = document.createElement('tr');
-                        row.innerHTML = `
-                            <td class="px-4 py-2 whitespace-nowrap">${product.id}</td>
-                            <td class="px-4 py-2 whitespace-nowrap">${product.name}</td>
-                            <td class="px-4 py-2 whitespace-nowrap">$${product.unitCost.toFixed(2)}</td>
-                            <td class="px-4 py-2 whitespace-nowrap">$${product.sellingPrice.toFixed(2)}</td>
-                            <td class="px-4 py-2 whitespace-nowrap">${product.quantity}</td>
-                            <td class="px-4 py-2 whitespace-nowrap">${product.discount}%</td>
-                            <td class="px-4 py-2 whitespace-nowrap">$${totalAfterDiscount.toFixed(2)}</td>
-                            <td class="px-4 py-2 whitespace-nowrap">
-                                <button class="btn btn-danger remove-product" data-id="${product.id}">
-                                    Remove
-                                </button>
-                            </td>
-                        `;
-                        productTable.appendChild(row);
-                    });
-            
-                    updateTotals(subtotal, totalDiscount, totalTax);
-            
-                    document.querySelectorAll('.remove-product').forEach(button => {
-                        button.addEventListener('click', handleRemoveProduct);
-                    });
-                }
-            
-                function updateTotals(subtotal, totalDiscount, totalTax) {
-                    const grandTotal = subtotal - totalDiscount + totalTax;
-            
-                    subtotalDisplay.textContent = subtotal.toFixed(2);
-                    discountAmountDisplay.textContent = totalDiscount.toFixed(2);
-                    taxDisplay.textContent = totalTax.toFixed(2);
-                    grandTotalDisplay.textContent = grandTotal.toFixed(2);
-                }
-            
-                function handleRemoveProduct(event) {
-                    const id = event.target.closest('button').dataset.id;
-                    const product = products.find(p => p.id === id);
-                    
-                    if (product) {
-                        productSelect.value = id;  
-                        const selectedOption = productSelect.options[productSelect.selectedIndex];
-                        const availableStock = parseInt(selectedOption.dataset.stock);
-                        updateStock(id, availableStock + product.quantity);
-                        products = products.filter(p => p.id !== id);
-                        updateTable();
-                    }
-                }
-            
-                function updateStock(productId, newStock) {
-                    const selectedOption = [...productSelect.options].find(option => option.value === productId);
-                    if (selectedOption) {
-                        selectedOption.dataset.stock = newStock;
-                        availableStockInput.value = newStock;
-                    }
-                }
-            
-                function resetProductForm() {
-                    productSelect.value = '';
-                    unitCostDisplayInput.value = '';
-                    sellingPriceDisplayInput.value = '';
-                    availableStockInput.value = '';
-                    quantityInput.value = '1';
-                    discountInput.value = '0';
-                }
-
-                document.getElementById('submitSale').addEventListener('click', function (event) {
-                    event.preventDefault(); // Prevent the default form submission
-                
-                    const formData = new FormData();
-                    formData.append('cliente', document.getElementById('client').value);
-                    formData.append('tipo_venta', document.getElementById('saleType').value);
-                    
-                    // Assuming 'products' is an array of objects with the required properties
-                    products.forEach(product => {
-                        formData.append('producto', product.id);
-                        formData.append('cantidad', product.quantity);
-                        formData.append('precio', product.sellingPrice);
-                    });
-                
-                    // Call the function to handle form submission
-                    submitFormData(formData);
-                });
-                
-                // Function to submit form data using Fetch API
-                function submitFormData(formData) {
-                    // Submit form data using Fetch API
-                    fetch(document.getElementById('pos-form').action, { // Use the action attribute of the form
-                        method: 'POST',
-                        body: formData,
-                        headers: {
-                            'X-CSRFToken': getCookie('csrftoken') // Ensure CSRF token is sent
-                        }
-                    })
-                    .then(response => {
-                        if (response.ok) {
-                            // Handle successful submission
-                            window.location.href = '/success-url/'; // Redirect on success
-                        } else {
-                            const jsonObject = Object.fromEntries(formData.entries());
-                            console.log(jsonObject); // Log the JSON object
-                            console.log(JSON.stringify(jsonObject)); // Log the JSON string
-                            alert('Error submitting the form. Please try again.');
-                        }
-                    })
-                    .catch(error => console.error('Error:', error));
-                }
-                
-                // Function to get CSRF token
-                function getCookie(name) {
-                    let cookieValue = null;
-                    if (document.cookie && document.cookie !== '') {
-                        const cookies = document.cookie.split(';');
-                        for (let i = 0; i < cookies.length; i++) {
-                            const cookie = cookies[i].trim();
-                            if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                                break;
-                            }
-                        }
-                    }
-                    return cookieValue;
-                }
-                
-                
-            
-               
             });
-            
-        </script>
+    
+            function addProduct(id, name, unitCost, quantity, discount, sellingPrice) {
+                const existingProduct = products.find(p => p.id === id);
+                if (existingProduct) {
+                    existingProduct.quantity += quantity;
+                } else {
+                    // Store selling price here
+                    products.push({ id, name, unitCost, quantity, discount, sellingPrice });
+                }
+            }
+    
+            clientSelect.addEventListener('change', function () {
+                const selectedOption = clientSelect.options[clientSelect.selectedIndex];
+                const address = selectedOption.getAttribute('data-address') || '';
+                const phone = selectedOption.getAttribute('data-phone') || '';
+                const ruc = selectedOption.getAttribute('data-ruc') || '';
+    
+                phoneNumberInput.value = phone;
+                rucNumberInput.value = ruc;
+                addressInput.value = address;
+            });
+    
+            function updateTable() {
+                productTable.innerHTML = '';
+                let subtotal = 0;
+                let totalDiscount = 0;
+                let totalTax = 0;
+    
+                products.forEach(product => {
+                    const totalCost = product.unitCost * product.quantity;
+                    const discountAmount = totalCost * (product.discount / 100);
+                    const totalAfterDiscount = totalCost - discountAmount;
+                    const productTax = totalCost * 0.15;
+    
+                    subtotal += totalCost;
+                    totalDiscount += discountAmount;
+                    totalTax += productTax;
+    
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td class="px-4 py-2">${product.id}</td>
+                        <td class="px-4 py-2">${product.name}</td>
+                        <td class="px-4 py-2">$${product.unitCost.toFixed(2)}</td>
+                        <td class="px-4 py-2">$${product.sellingPrice.toFixed(2)}</td> <!-- Fixed display of selling price -->
+                        <td class="px-4 py-2">${product.quantity}</td>
+                        <td class="px-4 py-2">${product.discount}%</td>
+                        <td class="px-4 py-2">$${totalAfterDiscount.toFixed(2)}</td>
+                        <td class="px-4 py-2">
+                            <button class="btn btn-danger remove-product" data-id="${product.id}">
+                                Remove
+                            </button>
+                        </td>
+                    `;
+                    productTable.appendChild(row);
+                });
+    
+                updateTotals(subtotal, totalDiscount, totalTax);
+    
+                document.querySelectorAll('.remove-product').forEach(button => {
+                    button.addEventListener('click', handleRemoveProduct);
+                });
+            }
+    
+            function updateTotals(subtotal, totalDiscount, totalTax) {
+                const grandTotal = subtotal - totalDiscount + totalTax;
+    
+                subtotalDisplay.textContent = subtotal.toFixed(2);
+                discountAmountDisplay.textContent = totalDiscount.toFixed(2);
+                taxDisplay.textContent = totalTax.toFixed(2);
+                grandTotalDisplay.textContent = grandTotal.toFixed(2);
+            }
+    
+            function handleRemoveProduct(event) {
+                const id = event.target.closest('button').dataset.id;
+                const product = products.find(p => p.id === id);
+    
+                if (product) {
+                    productSelect.value = id;
+                    const selectedOption = productSelect.options[productSelect.selectedIndex];
+                    const availableStock = parseInt(selectedOption.dataset.stock) || 0;
+                    updateStock(id, availableStock + product.quantity);
+                    products = products.filter(p => p.id !== id);
+                    updateTable();
+                }
+            }
+    
+            function updateStock(productId, newStock) {
+                const selectedOption = [...productSelect.options].find(option => option.value === productId);
+                if (selectedOption) {
+                    selectedOption.dataset.stock = newStock;
+                    availableStockInput.value = newStock;
+                }
+            }
+    
+            function resetProductForm() {
+                productSelect.value = '';
+                unitCostDisplayInput.value = '';
+                availableStockInput.value = '';
+                quantityInput.value = '1';
+                discountInput.value = '0';
+            }
+    
+            document.getElementById('submitSale').addEventListener('click', function (event) {
+                event.preventDefault(); // Prevent the default form submission
+    
+                const formData = new FormData();
+                formData.append('cliente', document.getElementById('client').value);
+                formData.append('tipo_venta', document.getElementById('saleType').value);
+                
+                // Append product details to form data
+                products.forEach(product => {
+                    formData.append('producto', product.id);
+                    formData.append('cantidad', product.quantity);
+                    formData.append('precio', product.sellingPrice); // Correctly using selling price
+                });
+    
+                // Call the function to handle form submission
+                submitFormData(formData);
+            });
+    
+            // Function to submit form data using Fetch API
+            function submitFormData(formData) {
+                fetch(document.getElementById('pos-form').action, { // Use the action attribute of the form
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'X-CSRFToken': getCookie('csrftoken') // Ensure CSRF token is sent
+                    }
+                })
+                .then(response => {
+                    if (response.ok) {
+                        // Handle successful submission
+                        window.location.href = "{% url 'detalle_ventas' %}"; // Redirect on success
+                    } else {
+                        const jsonObject = Object.fromEntries(formData.entries());
+                        console.log(jsonObject); // Log the JSON object
+                        console.log(JSON.stringify(jsonObject)); // Log the JSON string
+                        alert('Error submitting the form. Please try again.');
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+            }
+    
+            function getCookie(name) {
+                let cookieValue = null;
+                if (document.cookie && document.cookie !== '') {
+                    const cookies = document.cookie.split(';');
+                    for (let i = 0; i < cookies.length; i++) {
+                        const cookie = cookies[i].trim();
+                        if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                            break;
+                        }
+                    }
+                }
+                return cookieValue;
+            }
+        });
+    </script>
+    
+    
+    
    
     {% endblock %}
     

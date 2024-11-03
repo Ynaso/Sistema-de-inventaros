@@ -5,13 +5,22 @@ from django.dispatch import receiver
 from productos.models import Producto
 from kardex.models import TipoMovimiento, Kardex  # Ensure these imports are correct
 
-class FacturaCompra(models.Model):
-    proveedor = models.ForeignKey('proveedores.Proveedor', on_delete=models.CASCADE)  # Use string reference
-    fecha_ingreso = models.DateField()
-    responsable = models.CharField(max_length=100)
+class TipoCompra(models.Model):
+    nombre = models.CharField(max_length=100, unique=True)
+    descripcion = models.TextField(blank=True, null=True)
 
     def __str__(self):
-        return f"Factura Compra {self.id}"
+        return self.nombre
+
+class FacturaCompra(models.Model):
+    
+    proveedor = models.ForeignKey('proveedores.Proveedor', on_delete=models.CASCADE)  # Use string reference
+    fecha_ingreso = models.DateField(auto_now_add=True)
+    responsable = models.CharField(max_length=100)
+    tipo_compra = models.ForeignKey(TipoCompra, on_delete=models.CASCADE)  # New field
+
+    def __str__(self):
+        return f"Factura Compra {self.id} - {self.tipo_compra.nombre}"
 
 class DetalleCompra(models.Model):
     factura = models.ForeignKey(FacturaCompra, on_delete=models.CASCADE)
